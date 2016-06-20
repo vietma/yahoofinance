@@ -18,3 +18,6 @@ class Stock:
     
     def getDayLow(self, symbol):
         return self.__execute(symbol, 'g')
+    
+    def getChangeInPercent(self, symbol):
+        return self.__execute(symbol, 'p2')
