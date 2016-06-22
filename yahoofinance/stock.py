@@ -60,6 +60,5 @@ class Stock:
                 keys[6]: day_data[6]
             }
         
-        history_json = json.dumps(history_dict)
-        
+        history_json = json.dumps(history_dict)        
         return history_json
