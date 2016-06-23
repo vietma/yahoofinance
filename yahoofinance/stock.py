@@ -24,7 +24,7 @@ class Stock:
     def get_change_in_percent(self, symbol):
         return self.__search(symbol, 'p2')
     
-    def get_historical_prices(self, symbol, start_date, end_date):
+    def get_historical_prices_as_dictionary(self, symbol, start_date, end_date):
         # start_date and end_date are in format 'DD-MM-YYYY'
         params = urlencode({
             's': symbol,
@@ -60,5 +60,9 @@ class Stock:
                 keys[6]: day_data[6]
             }
         
-        history_json = json.dumps(history_dict)        
-        return history_json
+#        history_json = json.dumps(history_dict)        
+#        return history_json
+        return history_dict
+    
+    def get_historical_prices_as_json(self, symbol, start_date, end_date):
+        return json.dumps(self.get_historical_prices_as_dictionary(symbol, start_date, end_date))
