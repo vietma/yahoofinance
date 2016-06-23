@@ -68,6 +68,12 @@ class Stocks:
     def set_change_in_percent(self):
         self.criteria_dict['change_in_percent'] = 'p2'
         
+    def set_open(self):
+        self.criteria_dict['open'] = 'o'
+        
+    def set_previous_close(self):
+        self.criteria_dict['previous_close'] = 'p'
+        
     def set_52_week_low(self):
         self.criteria_dict['52_week_low'] = 'j'
         
