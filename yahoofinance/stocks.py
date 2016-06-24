@@ -24,7 +24,7 @@ class Stocks:
         symbols = symbols.replace(' ', '') 
            
         search_criteria = ''
-        for k, v in criteria_dictionary.iteritems():
+        for v in criteria_dictionary.itervalues():
             search_criteria += str(v)
         
         search_string = urllib.quote(search_criteria)
@@ -45,7 +45,7 @@ class Stocks:
             idx = 0
             inner_dict = dict()
             symbol = self.__remove_double_quotes(row_data[0])
-            for key, value in criteria_dictionary.iteritems():                
+            for key in criteria_dictionary:                
                 if criteria_dictionary.keys().index(key) == 0:
                     inner_dict['historical_prices'] = Stock().get_historical_prices_as_dictionary(symbol, '20-06-2016', '23-06-2016')
                 else:                                        
