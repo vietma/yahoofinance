@@ -25,19 +25,20 @@ class Stock:
         return self.__search(symbol, 'p2')
     
     def get_historical_prices_as_dictionary(self, symbol, start_date, end_date):
-        # start_date and end_date are in format 'DD-MM-YYYY'
+        # start_date and end_date are in format 'YYYY-MM-DD'
         params = urlencode({
             's': symbol,
-            'a': int(start_date[3:5]) - 1,
-            'b': int(start_date[0:2]),
-            'c': int(start_date[6:10]),
-            'd': int(end_date[3:5]) - 1,
-            'e': int(end_date[0:2]),
-            'f': int(end_date[6:10]),
+            'a': int(start_date[5:7]) - 1, # MM
+            'b': int(start_date[8:10]),    # DD
+            'c': int(start_date[0:4]),     # YYYY 
+            'd': int(end_date[5:7]) - 1,
+            'e': int(end_date[8:10]),
+            'f': int(end_date[0:4]),
             'g': 'd',
             'ignore': '.csv'
         })
         endpoint = 'http://real-chart.finance.yahoo.com/table.csv?%s' % params
+        print 'historical prices endpoint = %s' % endpoint
         
         request = Request(endpoint)
         response = urlopen(request)

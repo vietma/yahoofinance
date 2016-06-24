@@ -2,6 +2,7 @@ from urllib2 import Request, urlopen
 import urllib
 import json
 from collections import OrderedDict
+import datetime
 from yahoofinance import Stock
 
 class Stocks:
@@ -40,6 +41,13 @@ class Stocks:
         rows = content.splitlines()
         data_dict = dict()
         
+        today = datetime.date.today() # YYYY-MM-DD        
+        week_ago = today - datetime.timedelta(days=7) # YYYY-MM-DD
+        
+        start_date = week_ago.strftime('%Y-%m-%d')
+        end_date = today.strftime('%Y-%m-%d')
+        
+        
         for row in rows:
             row_data = row.split(',')
             idx = 0
@@ -47,7 +55,7 @@ class Stocks:
             symbol = self.__remove_double_quotes(row_data[0])
             for key in criteria_dictionary:                
                 if criteria_dictionary.keys().index(key) == 0:
-                    inner_dict['historical_prices'] = Stock().get_historical_prices_as_dictionary(symbol, '20-06-2016', '23-06-2016')
+                    inner_dict['historical_prices'] = Stock().get_historical_prices_as_dictionary(symbol, start_date, end_date)
                 else:                                        
                     idx += 1
                     inner_dict[key] = self.__remove_double_quotes(row_data[idx])                    
